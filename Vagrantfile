@@ -51,8 +51,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo yum -y install nano net-tools bind-utils   
     grep -q -F 'NM_CONTROLED=yes' /etc/sysconfig/network-scripts/ifcfg-eth0 || (echo 'NM_CONTROLED=yes' | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth0)
-    grep -q -F 'PEERDNS=no' /etc/sysconfig/network-scripts/ifcfg-eth0 || (echo 'PEERDNS=no' | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth0)
     sudo nmcli con mod "System eth0" ipv4.dns "192.168.56.13 10.0.2.3"    
+    grep -q -F 'PEERDNS=no' /etc/sysconfig/network-scripts/ifcfg-eth0 || (echo 'PEERDNS=no' | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth0)
     sudo sed -i "s/127\.0\.0\.1/10.0.2.15/g" /etc/hosts
     sudo systemctl restart NetworkManager.service
   SHELL
