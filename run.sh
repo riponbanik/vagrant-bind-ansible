@@ -1,0 +1,1 @@
+sudo ansible-playbook -i inventory provisioning/playbook.yml -vv
